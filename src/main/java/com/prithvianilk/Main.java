@@ -19,9 +19,6 @@ public class Main {
 //        postRepository.save(postId2, userId, "gg");
 
         System.out.println(postRepository.findByUserId(userId));
-        postRepository.countOfPostsByUserId().forEach(count -> {
-            System.out.println(count.component1());
-            System.out.println(count.component2());
-        });
+        postRepository.countOfPostsByUserId().forEach(System.out::println);
     }
 }

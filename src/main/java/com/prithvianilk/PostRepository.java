@@ -1,10 +1,8 @@
 package com.prithvianilk;
 
-import com.prithvianilk.Tables;
 import org.jooq.DSLContext;
 import com.prithvianilk.tables.records.PostsRecord;
-import org.jooq.Record2;
-import org.jooq.Result;
+import com.prithvianilk.Tables;
 
 import java.util.List;
 
@@ -35,10 +33,10 @@ public class PostRepository {
                 .fetch();
     }
 
-    public Result<Record2<Integer, String>> countOfPostsByUserId() {
+    public List<PostsCountByUserId> countOfPostsByUserId() {
         return dsl.select(count(), Tables.POSTS.USER_ID)
                 .from(Tables.POSTS)
                 .groupBy(Tables.POSTS.USER_ID)
-                .fetch();
+                .fetchInto(PostsCountByUserId.class);
     }
 }
