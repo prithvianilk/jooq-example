@@ -3,7 +3,8 @@ package com.prithvianilk.repository;
 import com.prithvianilk.PostsCountByUserId;
 import org.jooq.DSLContext;
 import com.prithvianilk.tables.records.PostsRecord;
-import com.prithvianilk.Tables;
+
+import static com.prithvianilk.Tables.POSTS;
 
 import java.util.List;
 
@@ -17,24 +18,24 @@ public class MyPostRepository {
     }
 
     public PostsRecord save(String id, String userId, String content) {
-        return dsl.insertInto(Tables.POSTS)
-                .set(Tables.POSTS.ID, id)
-                .set(Tables.POSTS.USER_ID, userId)
-                .set(Tables.POSTS.CONTENT, content)
+        return dsl.insertInto(POSTS)
+                .set(POSTS.ID, id)
+                .set(POSTS.USER_ID, userId)
+                .set(POSTS.CONTENT, content)
                 .returning()
                 .fetchOne();
     }
 
     public List<PostsRecord> findByUserId(String userId) {
-        return dsl.selectFrom(Tables.POSTS)
-                .where(Tables.POSTS.USER_ID.eq(userId))
+        return dsl.selectFrom(POSTS)
+                .where(POSTS.USER_ID.eq(userId))
                 .fetch();
     }
 
     public List<PostsCountByUserId> countOfPostsByUserId() {
-        return dsl.select(count(), Tables.POSTS.USER_ID)
-                .from(Tables.POSTS)
-                .groupBy(Tables.POSTS.USER_ID)
+        return dsl.select(count(), POSTS.USER_ID)
+                .from(POSTS)
+                .groupBy(POSTS.USER_ID)
                 .fetchInto(PostsCountByUserId.class);
     }
 }
