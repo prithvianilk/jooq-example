@@ -1,5 +1,6 @@
-package com.prithvianilk;
+package com.prithvianilk.repository;
 
+import com.prithvianilk.PostsCountByUserId;
 import org.jooq.DSLContext;
 import com.prithvianilk.tables.records.PostsRecord;
 import com.prithvianilk.Tables;
@@ -8,10 +9,10 @@ import java.util.List;
 
 import static org.jooq.impl.DSL.count;
 
-public class PostRepository {
+public class MyPostRepository {
     private final DSLContext dsl;
 
-    public PostRepository(DSLContext dsl) {
+    public MyPostRepository(DSLContext dsl) {
         this.dsl = dsl;
     }
 

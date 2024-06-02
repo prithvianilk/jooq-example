@@ -141,7 +141,9 @@ jooq {
             }
 
             // Generation flags: See advanced configuration properties
-            generate {}
+            generate {
+                daos = true
+            }
             target {
 
                 // The destination package of your generated classes (within the

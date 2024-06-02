@@ -1,13 +1,13 @@
-package com.prithvianilk;
+package com.prithvianilk.repository;
 
 import com.prithvianilk.tables.records.UsersRecord;
 import com.prithvianilk.Tables;
 import org.jooq.DSLContext;
 
-public class UserRepository {
+public class MyUserRepository {
     private final DSLContext dsl;
 
-    public UserRepository(DSLContext dsl) {
+    public MyUserRepository(DSLContext dsl) {
         this.dsl = dsl;
     }
 
