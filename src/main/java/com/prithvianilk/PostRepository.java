@@ -16,15 +16,12 @@ public class PostRepository {
     }
 
     public PostsRecord save(String id, String userId, String content) {
-        PostsRecord postsRecord = dsl
-                .newRecord(Tables.POSTS)
-                .with(Tables.POSTS.ID, id)
-                .with(Tables.POSTS.USER_ID, userId)
-                .with(Tables.POSTS.CONTENT, content);
-
-        postsRecord.store();
-
-        return postsRecord;
+        return dsl.insertInto(Tables.POSTS)
+                .set(Tables.POSTS.ID, id)
+                .set(Tables.POSTS.USER_ID, userId)
+                .set(Tables.POSTS.CONTENT, content)
+                .returning()
+                .fetchOne();
     }
 
     public List<PostsRecord> findByUserId(String userId) {

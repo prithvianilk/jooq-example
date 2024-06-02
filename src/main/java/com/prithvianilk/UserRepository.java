@@ -12,21 +12,17 @@ public class UserRepository {
     }
 
     public UsersRecord save(String id, String username) {
-        UsersRecord usersRecord = dsl
-                .newRecord(Tables.USERS)
-                .with(Tables.USERS.ID, id)
-                .with(Tables.USERS.USERNAME, username);
-
-        usersRecord.store();
-
-        return usersRecord;
+        return dsl.insertInto(Tables.USERS)
+                .set(Tables.USERS.ID, id)
+                .set(Tables.USERS.USERNAME, username)
+                .returning()
+                .fetchOne();
     }
 
     public UsersRecord findById(String id) {
-        return dsl.selectFrom(com.prithvianilk.Tables.USERS)
+        return dsl.selectFrom(Tables.USERS)
                 .where(Tables.USERS.ID.eq(id))
                 .limit(1)
-                .fetch()
-                .get(0);
+                .fetchOne();
     }
 }
