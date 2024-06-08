@@ -20,9 +20,10 @@ public class Main {
         MyPostRepository postRepository = new MyPostRepository(dsl);
 //        postRepository.save(postId1, userId, "lmao");
 //        postRepository.save(postId2, userId, "gg");
-//        postRepository.save(postId3, userId, "dhh rox");
+//        postRepository.save(postId3, userId, "dhh gg rox");
 
         System.out.println(postRepository.findByUserId(userId));
-        postRepository.countOfPostsByUserId().forEach(System.out::println);
+        System.out.println(postRepository.countOfPostsByUserId());
+        System.out.println(postRepository.findPostsWhereContentContains("gg"));
     }
 }

@@ -38,4 +38,10 @@ public class MyPostRepository {
                 .groupBy(POSTS.USER_ID)
                 .fetchInto(PostsCountByUserId.class);
     }
+
+    public List<PostsRecord> findPostsWhereContentContains(String contentPattern) {
+        return dsl.selectFrom(POSTS)
+                .where(POSTS.CONTENT.like("%" + contentPattern + "%"))
+                .fetch();
+    }
 }
