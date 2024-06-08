@@ -3,6 +3,8 @@ package com.prithvianilk.repository;
 import com.prithvianilk.tables.records.UsersRecord;
 import org.jooq.DSLContext;
 
+import java.util.List;
+
 import static com.prithvianilk.Tables.USERS;
 
 public class MyUserRepository {
@@ -18,6 +20,10 @@ public class MyUserRepository {
                 .set(USERS.USERNAME, username)
                 .returning()
                 .fetchOne();
+    }
+
+    public List<UsersRecord> findAll() {
+        return dsl.selectFrom(USERS).fetch();
     }
 
     public UsersRecord findById(String id) {

@@ -8,6 +8,7 @@ import static com.prithvianilk.Tables.POSTS;
 
 import java.util.List;
 
+import static com.prithvianilk.Tables.USERS;
 import static org.jooq.impl.DSL.count;
 
 public class MyPostRepository {
@@ -43,5 +44,12 @@ public class MyPostRepository {
         return dsl.selectFrom(POSTS)
                 .where(POSTS.CONTENT.like("%" + contentPattern + "%"))
                 .fetch();
+    }
+
+    public List<PostsCountByUserName> countOfPostsByUserName() {
+        return dsl.select(count(), USERS.USERNAME)
+                .from(POSTS).join(USERS).on(POSTS.USER_ID.eq(USERS.ID))
+                .groupBy(USERS.USERNAME)
+                .fetchInto(PostsCountByUserName.class);
     }
 }
