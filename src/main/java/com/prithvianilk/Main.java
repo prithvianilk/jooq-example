@@ -1,7 +1,7 @@
 package com.prithvianilk;
 
-import com.prithvianilk.repository.MyPostRepository;
-import com.prithvianilk.repository.MyUserRepository;
+import com.prithvianilk.repository.PostRepository;
+import com.prithvianilk.repository.UserRepository;
 import com.prithvianilk.tables.daos.PostsDao;
 import com.prithvianilk.tables.daos.UsersDao;
 import org.jooq.Configuration;
@@ -28,14 +28,14 @@ public class Main {
 
     private static void showcaseDsl() {
         DSLContext dsl = DslContextSingleton.getInstance();
-        MyUserRepository userRepository = new MyUserRepository(dsl);
+        UserRepository userRepository = new UserRepository(dsl);
 //         userRepository.save(userId, "prithvianilk");
 //         userRepository.save(userId2, "ragiballs");
 
         log.info("{}", userRepository.findAll());
         log.info("{}", userRepository.findById(userId));
 
-        MyPostRepository postRepository = new MyPostRepository(dsl);
+        PostRepository postRepository = new PostRepository(dsl);
 //        postRepository.save(postId1, userId, "lmao");
 //        postRepository.save(postId2, userId, "gg");
 //        postRepository.save(postId3, userId, "dhh gg rox");

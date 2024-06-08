@@ -10,10 +10,10 @@ import java.util.List;
 import static com.prithvianilk.Tables.USERS;
 import static org.jooq.impl.DSL.count;
 
-public class MyPostRepository {
+public class PostRepository {
     private final DSLContext dsl;
 
-    public MyPostRepository(DSLContext dsl) {
+    public PostRepository(DSLContext dsl) {
         this.dsl = dsl;
     }
 

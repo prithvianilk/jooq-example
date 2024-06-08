@@ -7,10 +7,10 @@ import java.util.List;
 
 import static com.prithvianilk.Tables.USERS;
 
-public class MyUserRepository {
+public class UserRepository {
     private final DSLContext dsl;
 
-    public MyUserRepository(DSLContext dsl) {
+    public UserRepository(DSLContext dsl) {
         this.dsl = dsl;
     }
 
