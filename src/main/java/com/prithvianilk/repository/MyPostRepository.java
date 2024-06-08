@@ -49,7 +49,7 @@ public class MyPostRepository {
     public List<PostsCountByUserName> countOfPostsByUserName() {
         return dsl.select(count(), USERS.USERNAME)
                 .from(POSTS).join(USERS).on(POSTS.USER_ID.eq(USERS.ID))
-                .groupBy(USERS.USERNAME)
+                .groupBy(USERS.ID)
                 .fetchInto(PostsCountByUserName.class);
     }
 }
