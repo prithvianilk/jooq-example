@@ -15,22 +15,11 @@ public class DslContextSingleton {
     private static DSLContext dsl;
 
     public static DSLContext getInstance() {
-        if (Objects.nonNull(dsl)) {
-            return dsl;
+        if (Objects.isNull(dsl)) {
+            Connection conn = JdbcConnectionSingleton.getInstance();
+            dsl = DSL.using(conn, SQLDialect.SQLITE);
         }
-
-        Connection conn = getConnection();
-        dsl = DSL.using(conn, SQLDialect.SQLITE);
 
         return dsl;
-    }
-
-    private static Connection getConnection() {
-        try {
-            Class.forName("org.sqlite.JDBC");
-            return DriverManager.getConnection("jdbc:sqlite:/Users/prithvianilkumar/code/fun/jooq-example/lol.db");
-        } catch (Exception e) {
-            throw new RuntimeException(e);
-        }
     }
 }

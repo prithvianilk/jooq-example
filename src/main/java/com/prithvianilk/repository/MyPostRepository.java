@@ -1,6 +1,5 @@
 package com.prithvianilk.repository;
 
-import com.prithvianilk.PostsCountByUserId;
 import org.jooq.DSLContext;
 import com.prithvianilk.tables.records.PostsRecord;
 
