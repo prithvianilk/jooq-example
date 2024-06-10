@@ -45,6 +45,7 @@ public class Main {
         log.info("{}", postRepository.countOfPostsByUserId());
         log.info("{}", postRepository.findPostsWhereContentContains("gg"));
         log.info("{}", postRepository.countOfPostsByUserName());
+        log.info("{}", postRepository.postsOwnedByUserWithUsername("prithvianilk"));
     }
 
     private static void showcaseDao() {

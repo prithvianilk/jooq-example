@@ -51,4 +51,14 @@ public class PostRepository {
                 .groupBy(USERS.ID)
                 .fetchInto(PostsCountByUserName.class);
     }
+
+    public List<PostsRecord> postsOwnedByUserWithUsername(String username) {
+        var userIdsWithUsername = dsl.select(USERS.ID)
+                .from(USERS)
+                .where(USERS.USERNAME.eq(username));
+
+        return dsl.selectFrom(POSTS)
+                .where(POSTS.USER_ID.in(userIdsWithUsername))
+                .fetch();
+    }
 }
