@@ -8,14 +8,14 @@ import java.util.List;
 import static com.prithvianilk.Tables.USERS;
 
 public class UserRepository {
-    private final DSLContext dsl;
+    private final DSLContext sql;
 
     public UserRepository(DSLContext dsl) {
-        this.dsl = dsl;
+        this.sql = dsl;
     }
 
     public UsersRecord save(String id, String username) {
-        return dsl.insertInto(USERS)
+        return sql.insertInto(USERS)
                 .set(USERS.ID, id)
                 .set(USERS.USERNAME, username)
                 .returning()
@@ -23,11 +23,11 @@ public class UserRepository {
     }
 
     public List<UsersRecord> findAll() {
-        return dsl.selectFrom(USERS).fetch();
+        return sql.selectFrom(USERS).fetch();
     }
 
     public UsersRecord findById(String id) {
-        return dsl.selectFrom(USERS)
+        return sql.selectFrom(USERS)
                 .where(USERS.ID.eq(id))
                 .limit(1)
                 .fetchOne();

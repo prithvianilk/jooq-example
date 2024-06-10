@@ -11,14 +11,14 @@ import static com.prithvianilk.Tables.USERS;
 import static org.jooq.impl.DSL.count;
 
 public class PostRepository {
-    private final DSLContext dsl;
+    private final DSLContext sql;
 
     public PostRepository(DSLContext dsl) {
-        this.dsl = dsl;
+        this.sql = dsl;
     }
 
     public PostsRecord save(String id, String userId, String content) {
-        return dsl.insertInto(POSTS)
+        return sql.insertInto(POSTS)
                 .set(POSTS.ID, id)
                 .set(POSTS.USER_ID, userId)
                 .set(POSTS.CONTENT, content)
@@ -27,37 +27,37 @@ public class PostRepository {
     }
 
     public List<PostsRecord> findByUserId(String userId) {
-        return dsl.selectFrom(POSTS)
+        return sql.selectFrom(POSTS)
                 .where(POSTS.USER_ID.eq(userId))
                 .fetch();
     }
 
     public List<PostsCountByUserId> countOfPostsByUserId() {
-        return dsl.select(count(), POSTS.USER_ID)
+        return sql.select(count(), POSTS.USER_ID)
                 .from(POSTS)
                 .groupBy(POSTS.USER_ID)
                 .fetchInto(PostsCountByUserId.class);
     }
 
     public List<PostsRecord> findPostsWhereContentContains(String contentPattern) {
-        return dsl.selectFrom(POSTS)
+        return sql.selectFrom(POSTS)
                 .where(POSTS.CONTENT.like("%" + contentPattern + "%"))
                 .fetch();
     }
 
     public List<PostsCountByUserName> countOfPostsByUserName() {
-        return dsl.select(count(), USERS.USERNAME)
+        return sql.select(count(), USERS.USERNAME)
                 .from(POSTS).join(USERS).on(POSTS.USER_ID.eq(USERS.ID))
                 .groupBy(USERS.ID)
                 .fetchInto(PostsCountByUserName.class);
     }
 
     public List<PostsRecord> postsOwnedByUserWithUsername(String username) {
-        var userIdsWithUsername = dsl.select(USERS.ID)
+        var userIdsWithUsername = sql.select(USERS.ID)
                 .from(USERS)
                 .where(USERS.USERNAME.eq(username));
 
-        return dsl.selectFrom(POSTS)
+        return sql.selectFrom(POSTS)
                 .where(POSTS.USER_ID.in(userIdsWithUsername))
                 .fetch();
     }
